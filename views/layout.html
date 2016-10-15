@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Emergency Response Network | </title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/vendors/font-awesome/css/font-awesome.min.css">
+    <!-- NProgress -->
+    <link rel="stylesheet" href="/vendors/nprogress/nprogress.css" >
+
+    <link rel="stylesheet" type="text/css" href="/vendors/gmaps/gmaps.js">
+
+    <!-- Custom Theme Style -->
+    <link href="/build/css/custom.css" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>ERN</span></a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <!-- menu profile quick info -->
+                    <!-- /menu profile quick info -->
+
+                    <br />
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3></h3>
+
+                            <ul class="nav side-menu">
+                                <li><a href="/"><i class="fa fa-th"></i> Nodes </a>
+                                <!-- <li><a href="/node"><i class="fa fa-gear"></i> Administration </a> -->
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!-- /sidebar menu -->
+
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav>
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="/images/img.jpg" alt="">John Doe
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                    <li><a href="javascript:;"> Profile</a></li>
+                                    <li>
+                                        <a href="javascript:;">
+                                            <span class="badge bg-red pull-right">50%</span>
+                                            <span>Settings</span>
+                                        </a>
+                                    </li>
+                                    <li><a href="javascript:;">Help</a></li>
+                                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                </ul>
+                            </li>
+
+                            <li role="presentation" class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="badge bg-green">6</span>
+                                </a>
+                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                    <li>
+                                        <a>
+                                            <span class="image"><i class="fa fa-warning"></i></span>
+                                            <span>
+                                                <span>&nbsp;Shah Alam</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">Emergency signal recieved from location: xxx, ip address: xxxx in xxxx</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="text-center">
+                                            <a>
+                                                <strong>See All Alerts</strong>
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+            <!-- /page content -->
+
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    Emergency Response Network <a href="">ERN</a>
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="/vendors/nprogress/nprogress.js"></script>
+    <!-- Google Maps API -->
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyApBeaZevk0f0FZjlLxprNNaE6DCsRZS7c"></script>
+    
+    <!-- GMaps.js -->
+    <script src="/js/gmaps.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="/build/js/custom.min.js"></script>
+    <!-- custom -->
+    <script>
+        $(document).ready(function() {
+            if ($("#map").length) {
+                new GMaps({
+                    div: '#map',
+                    lat: -12.043333,
+                    lng: -77.028333
+                });
+            }
+        });
+    </script>
+   
+  
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('.node-location').each(function(index, location){
+      var loc = $(location);
+      var lat = parseFloat(loc.data("lat"));
+      var lng = parseFloat(loc.data("lng"));
+      console.log(lat,lng)
+      var key = "AIzaSyB0i-4TVrzAg0P99LRno8MrDggKas9lues";
+      var params = "latlng="+lat+","+lng+"&key="+key;
+      var apiUrl = "https://maps.googleapis.com/maps/api/geocode/json?"+params;
+      console.log(apiUrl);
+      $.getJSON(apiUrl, function(res){
+        console.log(res);
+        if (res.status == "OK" && res.results[0]){
+          loc.text(res.results[0].formatted_address)  
+        }
+        
+      }).fail(function(jqXHR, textStatus, errorThrown) {
+        console.log("error " + textStatus);
+        console.log("incoming Text " + jqXHR.responseText);
+      });
+    });
+  });
+  </script>
+</body>
+</html>

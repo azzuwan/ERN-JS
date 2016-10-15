@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="col-md-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Nodes Status</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <!-- start project list -->
+            <table class="table table-striped projects">
+                <thead>
+                    <tr>
+                        <th style="width: 1%">#</th>
+                        <th >Node Location</th>                        
+                        <th style="width: 25%">Last Update</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for node in nodes %}
+                    <tr data-node-id="{{node.id}}">
+                        <td>{{loop.index}}</td>
+                        <td class="node-location" data-lat="{{node.lat}}" data-lng="{{node.lng}}">
+                        </td>
+                        <td>{{node.timestamp|unix_to_date}}</td>
+                        <td>
+                            {% if node.status == "online"%}
+                            <button type="button" class="btn btn-success btn-xs" id="btn-0101">{{node.status}}</button>
+                            {% else %}
+                             <button type="button" class="btn btn-normal btn-xs" id="btn-0101">{{node.status}}</button>
+                             {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                   
+                </tbody>
+            </table>
+            <!-- end project list -->
+
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -239,14 +239,12 @@
         console.log("location request fail message " + jqXHR.responseText);
       });
 
-
-          
-      
+      $('#btn-view-camera').click(function(){
+        window.location = "/videos";
+      });
     }
 
   });
-
-
 
   function blinking(elm) {
     timer = setInterval(blink, 10);

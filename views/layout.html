@@ -168,32 +168,21 @@
     <script src="/js/gmaps.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="/build/js/custom.min.js"></script>
-    <!-- custom -->
-    <script>
-        $(document).ready(function() {
-            if ($("#map").length) {
-                new GMaps({
-                    div: '#map',
-                    lat: -12.043333,
-                    lng: -77.028333
-                });
-            }
-        });
-    </script>
-   
-  
+    <!-- custom -->     
   <script type="text/javascript">
   var timer = null;
+  var key = "AIzaSyB0i-4TVrzAg0P99LRno8MrDggKas9lues";
   $(document).ready(function(){
     $('.node-location').each(function(index, location){
       var loc = $(location);
       var lat = parseFloat(loc.data("lat"));
       var lng = parseFloat(loc.data("lng"));
-      console.log(lat,lng)
-      var key = "AIzaSyB0i-4TVrzAg0P99LRno8MrDggKas9lues";
+      console.log(lat,lng)      
       var params = "latlng="+lat+","+lng+"&key="+key;
       var apiUrl = "https://maps.googleapis.com/maps/api/geocode/json?"+params;
       console.log(apiUrl);
+      
+      //Get map address
       $.getJSON(apiUrl, function(res){
         //console.log(res);
         if (res.status == "OK" && res.results[0]){
@@ -202,7 +191,7 @@
         
       }).fail(function(jqXHR, textStatus, errorThrown) {
         console.log("error " + textStatus);
-        console.log("incoming Text " + jqXHR.responseText);
+        console.log("location request fail message " + jqXHR.responseText);
       });
     });
 
@@ -245,10 +234,48 @@
     });
 
     $('tr').click(function(){
-      var nodeId = $(this).id; 
+      var nodeId = $(this).data("node-id");
+      window.location = "/nodes/" + nodeId;
     })
 
+    ////////////Node Detail Page//////////////
+    if($('#detail-coord').length){
+      var address = $('#detail-address');
+      var coord = $('#detail-coord');
+      var latlng = coord.data("coord");
+      var pos = latlng.split(',');
+      console.log(latlng);
+      var params = "latlng="+latlng+"&key="+key;
+      var apiUrl = "https://maps.googleapis.com/maps/api/geocode/json?"+params;
+      console.log(apiUrl);
+      $.getJSON(apiUrl, function(res){        
+        if (res.status == "OK" && res.results[0]){
+          address.append(res.results[0].formatted_address)
+          var map = new GMaps({
+              div: '#map',
+              lat: parseFloat(pos[0]),
+              lng: parseFloat(pos[1]),              
+          });  
+
+          map.addMarker({
+            lat: parseFloat(pos[0]),
+            lng: parseFloat(pos[1]),
+          });
+        }
+        
+      }).fail(function(jqXHR, textStatus, errorThrown) {
+        console.log("error " + textStatus);
+        console.log("location request fail message " + jqXHR.responseText);
+      });
+
+
+          
+      
+    }
+
   });
+
+
 
   function blinking(elm) {
     timer = setInterval(blink, 10);

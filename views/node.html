@@ -1,3 +1,5 @@
+{% extends 'layout.html' %}
+{% block content %}
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
@@ -9,46 +11,42 @@
             <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
                 <div class="profile_title">
                     <div class="col-md-12">
-                        <h3>Node ID #0101</h3>
+                        <h4>Node ID: {{node.node_id|upper}}</h4>
                     </div>
                 </div>
                 <br/>
                 <ul class="list-unstyled user_data">
                     <li>
-                        <h4><i class="fa fa-map-marker user-profile-icon"></i>&nbsp;&nbsp;&nbsp;&nbsp;Shah Alam</h4>
+                        <h5 id="detail-address"><i class="fa fa-map-marker user-profile-icon"></i>&nbsp;&nbsp;</h5>
                     </li>
 
                     <li>
-                        <h4><i class="fa fa-wifi user-profile-icon"></i>&nbsp;&nbsp;192.168.0.100</h4>
+                        <h5 id="detail-coord" data-coord="{{node.lat}},{{node.lng}}"><i class="fa fa-wifi user-profile-icon"></i>&nbsp;&nbsp;{{node.lat}}, {{node.lng}}</h5>
                     </li>
 
                     <li>
-                        <h4><i class="fa fa-clock-o user-profile-icon"></i>&nbsp;&nbsp;&nbsp;2016-10-01 03:32:44</h4>
+                        <h5><i class="fa fa-clock-o user-profile-icon"></i>&nbsp;&nbsp;{{node.timestamp|unix_to_date}}</h5>
 
                     </li>
                 </ul>
                 <br>
 
-                <span class="label label-success label-status">Online</span>
+                <span class="label label-success label-status">{{node.status}}</span>
+                <button type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-camera"></span> Camera
+                </button>
                 <br/> <br/>
-
-
             </div>
             <div class="col-md-9 col-sm-9 col-xs-12">
 
                 <div class="profile_title">
                     <div class="col-md-6">
                         <h2>Location map</h2>
-                    </div>
-                    <div class="col-md-6">
-                        <div id="reportrange" class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">
-                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                            <span>May 23, 2016 - June 21, 2016</span> <b class="caret"></b>
-                        </div>
-                    </div>
+                    </div>                   
                 </div>
                 <div class="col-md-12" id="map"></div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}

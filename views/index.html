@@ -19,7 +19,7 @@
                 </thead>
                 <tbody>
                     {% for node in nodes %}
-                    <tr id="{{node.node_id}}" data-node-id="{{node.id}}">
+                    <tr id="{{node.node_id}}" data-node-id="{{node.id}}" class="node-row">
                         <td>{{loop.index}}</td>
                         <td class="node-location" data-lat="{{node.lat}}" data-lng="{{node.lng}}">
                         </td>

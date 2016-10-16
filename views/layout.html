@@ -183,6 +183,7 @@
    
   
   <script type="text/javascript">
+  var timer = null;
   $(document).ready(function(){
     $('.node-location').each(function(index, location){
       var loc = $(location);
@@ -210,15 +211,53 @@
       console.log(data);      
     });
 
-    socket.on("nodes", function(nodes){
-      console.log(nodes)
+    socket.on("nodes", function(node){
+      console.log(node);
+      var nodeId = node.new_val.node_id;
+      var status = node.new_val.status;
+      var tr = $('#'+ nodeId); 
+      var btn = tr.find('.node-status');
+      if (!tr.hasClass("alert")){
+        if(status === "offline"){
+          btn.text(status);
+          btn.removeClass("btn-success");
+          btn.addClass("btn-normal");
+        }else{
+          btn.text(status);
+          btn.removeClass("btn-normal");
+          btn.addClass("btn-success");
+        }  
+      }
     });
 
-    socket.on("alerts", function(alerts){
-      console.log(alerts);
+    socket.on("alerts", function(alert){
+      console.log(alert);
+      var nodeId = alert.new_val.node_id;
+      var tr = $('#'+ nodeId);      
+      tr.addClass("alert");
+      tr.addClass("distress-row");
+      var btn = tr.find('.node-status');
+      btn.text("alert");
+      btn.removeClass("btn-success btn-normal");
+      btn.addClass("btn-danger");
+      blinking(btn);
+
     });
+
+    $('tr').click(function(){
+      var nodeId = $(this).id; 
+    })
 
   });
+
+  function blinking(elm) {
+    timer = setInterval(blink, 10);
+    function blink() {
+        elm.fadeOut(500, function() {
+           elm.fadeIn(500);
+        });
+    }
+  }
   </script>
 </body>
 </html>

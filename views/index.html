@@ -19,16 +19,16 @@
                 </thead>
                 <tbody>
                     {% for node in nodes %}
-                    <tr data-node-id="{{node.id}}">
+                    <tr id="{{node.node_id}}" data-node-id="{{node.id}}">
                         <td>{{loop.index}}</td>
                         <td class="node-location" data-lat="{{node.lat}}" data-lng="{{node.lng}}">
                         </td>
                         <td>{{node.timestamp|unix_to_date}}</td>
                         <td>
                             {% if node.status == "online"%}
-                            <button type="button" class="btn btn-success btn-xs" id="btn-0101">{{node.status}}</button>
+                            <button type="button" class="btn btn-md btn-success node-status">{{node.status}}</button>
                             {% else %}
-                             <button type="button" class="btn btn-normal btn-xs" id="btn-0101">{{node.status}}</button>
+                             <button type="button" class="btn btn-md btn-normal node-status">{{node.status}}</button>
                              {% endif %}
                         </td>
                     </tr>

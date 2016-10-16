@@ -4135,3 +4135,7 @@ ul.notifications {
   width: 100%;  
   height: 500px;
 }
+
+.distress-row{
+  background-color: #ebfb00 !important;
+}

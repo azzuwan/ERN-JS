@@ -6,11 +6,17 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
 var moment = require('moment');
+var websocket = require("socket.io");
+var rdb = require("rethinkdb");
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+var wsock = websocket();
+
+app.wsock = wsock;
 
 var env = nunjucks.configure('views', {autoescape: true, express: app});
 env.addFilter("unix_to_date", function(timestamp){
@@ -62,5 +68,38 @@ app.use(function(err, req, res, next) {
   });
 });
 
+var clientSocket = null;
+
+app.wsock.on("connection", function(socket){
+  clientSocket = socket;
+  //console.log("Socket client ", socket);
+  socket.emit("connected",{msg: "hello"});
+});
+
+
+var dbConn = null;
+
+rdb.connect({host: 'localhost', port: 28015}, function(err, conn){
+  if (err) throw err;
+  dbConn = conn; 
+  rdb.db("ERN").table("nodes").changes().run(conn, function(nodesErr, cursor){
+    if (nodesErr) throw nodesErr;
+    cursor.each(function(err, row) {
+      if (err) throw err;
+      console.log(JSON.stringify(row, null, 2));
+      app.wsock.sockets.emit("nodes", row); 
+    }); 
+           
+  });
+
+  rdb.db("ERN").table("alerts").changes().run(conn, function(err,cursor){
+    cursor.each(function(curErr, changes){
+      if (curErr) throw curErr;
+      console.log("Alert updates: ", changes);
+      app.wsock.sockets.emit("alerts", changes);  
+    });
+    
+  });
+});
 
 module.exports = app;

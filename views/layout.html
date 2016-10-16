@@ -161,6 +161,8 @@
     <script src="/vendors/nprogress/nprogress.js"></script>
     <!-- Google Maps API -->
     <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyApBeaZevk0f0FZjlLxprNNaE6DCsRZS7c"></script>
+
+    <script type="text/javascript" src="/js/socket.io/socket.io.js"></script>
     
     <!-- GMaps.js -->
     <script src="/js/gmaps.js"></script>
@@ -192,7 +194,7 @@
       var apiUrl = "https://maps.googleapis.com/maps/api/geocode/json?"+params;
       console.log(apiUrl);
       $.getJSON(apiUrl, function(res){
-        console.log(res);
+        //console.log(res);
         if (res.status == "OK" && res.results[0]){
           loc.text(res.results[0].formatted_address)  
         }
@@ -202,6 +204,20 @@
         console.log("incoming Text " + jqXHR.responseText);
       });
     });
+
+    var socket = io.connect('http://localhost:9292');
+    socket.on('connected', function (data) {
+      console.log(data);      
+    });
+
+    socket.on("nodes", function(nodes){
+      console.log(nodes)
+    });
+
+    socket.on("alerts", function(alerts){
+      console.log(alerts);
+    });
+
   });
   </script>
 </body>

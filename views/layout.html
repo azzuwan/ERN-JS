@@ -169,7 +169,7 @@
       });
     });
 
-    var socket = io.connect('https://'+ host);
+    var socket = io.connect('http://'+ host);
     socket.on('connected', function (data) {
       console.log(data);      
     });
